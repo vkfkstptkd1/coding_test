@@ -98,7 +98,8 @@ def fill_empty_cells(board, wall_queue):
     empty_cells = []
     
     # 각 열에 대해, 아래부터 위로 빈 칸 찾기
-    for col in range(n): 
+    for col in range(n):
+        for row in range(n - 1, -1, -1):
             if board[row][col] == 0:
                 empty_cells.append((row, col))
     # 이미 열 오름차순, 행 내림차순으로 추가되었으므로 sort 필요 없음
@@ -199,11 +200,11 @@ def run_simulation(board, wall_queue, K):
 
 # 벽 숫자 입력 (총 m개의 숫자가 들어옴)
 k,m = map(int,input().split())
-graph =[list(map(int,input().split())) for _ in range(5)]
+board =[list(map(int,input().split())) for _ in range(5)]
 wall_nums = list(map(int, input().split()))
 wall_queue = deque(wall_nums)
 
 # 전체 시뮬레이션 실행
-turn_scores = run_simulation(graph, wall_queue, k)
+turn_scores = run_simulation(board, wall_queue, k)
 # 출력: 각 턴의 점수를 공백으로 구분하여 출력 (예: 17 3)
 print(*turn_scores)
